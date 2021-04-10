@@ -106,7 +106,7 @@ def load_data(path):
         title_list = []
         txt_list = []
         for index in range(len(data)):
-            label_list.append(data[index][:10])
+            label_list.append(rating_convert(str(data[index][:10])))
             title = data[index][11:-1].split(":")[0]
             title_list.append(title)
             txt_list.append(data[index][11:-1].replace(title + ': ', ""))
@@ -115,9 +115,9 @@ def load_data(path):
 
 def rating_convert(str):
     if str=="__label__1":
-        return "Great Comments!"
+        return "Great!"
     else:
-        return "Bad Comments!"
+        return "Bad!"
 
 if __name__ == '__main__':
     insert_data_to_es()
