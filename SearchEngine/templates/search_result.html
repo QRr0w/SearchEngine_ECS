@@ -3,39 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>SearchResult</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
-<body>
+<body >
 <div id="container">
-    <div id="hd" class="ue-clear" align="center">
-        <form method="POST" action="/search">
-            <h1 align="center">Enter your query!</h1><br>
-            <input type="search" name="keyword" value="{{ keyword }}"><br>
-            <input type="submit" value="Search">
+    <br>
+    <br>
+        <form class="form-inline" method="POST" action="/search">
+            <div class="form-group">
+                <input style="height: 40px; width: 360px;" class="form-control"
+                        type="search" name="keyword" value="{{ keyword }}">
+            </div>
+            <input class="btn btn-small btn-success" role="button" type="submit" value="Search">
         </form>
+    <br>
+    <br>Find <font color="blue">{{ search_nums }}</font> results
+    <br>
+    <br>
+    <div id="box">
+    {% for search in search_result %}
+    <p><b><font size="4" color="blue">{{ search.title|safe }}</font></b></p>
+        <div class="itemBody">
+            {% autoescape off %}{{ search.comments }}{% endautoescape %}
+        </div>
+    <p><font size="4">Rating: </font><font color="red">{{ search.rating }}</font> </p>
+    <br>
+    {% endfor %}
     </div>
-    <div class="resultArea">
-    <p class="resultTotal">
-        <span class="info">Find about&nbsp;<span class="totalResult"><font color="blue">{{ search_nums }}</font></span>&nbsp;result</span>
-    </p>
-    </div>
-    <div class="resultList">
-        {% for search in search_result %}
-        <div class="resultItem">
-                <div class="itemHead">
-                    <b  class="title"><font size="4" color="blue">{% autoescape off %}{{ search.title }}{% endautoescape %}</font></b>
-                    <span class="divsion">-</span>
-                </div>
-                <div class="itemBody">
-                    {% autoescape off %}{{ search.comments }}{% endautoescape %}
-                </div>
-                    <span class="info">
-                        <label>Rating：</label>
-                        <span class="value"><font color="red">{{search.rating}}</font></span><br>
-                    </span>
-                </div>
-        </div><br>
-        {% endfor %}
-    </div>
+
 
 </div>
 </body>
