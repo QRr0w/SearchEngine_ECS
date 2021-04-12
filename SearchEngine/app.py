@@ -2,10 +2,10 @@ from flask import Flask, render_template, request
 from search import elasticSearch
 import jsonify
 import json
+from params import index_name, host_address, port, index_type
+
 
 app = Flask(__name__)
-index_name = "version2.0"
-index_type = "_doc"
 
 @app.route('/')
 def index():
@@ -29,10 +29,7 @@ def get_es():
                                keyword=query)
     return render_template('search.html')
 
-        # new_data = json.dumps(result_list)
-        # return app.response_class(new_data, content_type='application/json')
-
 if __name__ == '__main__':
-    app.run(host='127.0.0.1',
-            port=5000,
+    app.run(host=host_address,
+            port=port,
             debug=True)

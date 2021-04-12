@@ -1,12 +1,11 @@
 import elasticsearch
 from elasticsearch import Elasticsearch
 import numpy as np
+from params import index_name, path
 
 
 def insert_data_to_es():
     es = Elasticsearch()
-    path = 'dataset\\test.ft.txt'
-    index_name = "version5.0"
     setting = {
         "settings": {
             "analysis": {
@@ -105,10 +104,10 @@ def insert_data_to_es():
                      })
 
 
-def load_data(path):
+def load_data(file_path):
     # dataset = np.loadtxt(path, encoding='utf-8', dtype=str)
     # return dataset
-    with open(path, "r", encoding='utf-8') as f:
+    with open(file_path, "r", encoding='utf-8') as f:
         data = f.readlines()
         label_list = []
         title_list = []
@@ -122,7 +121,7 @@ def load_data(path):
     return np.array([label_list, title_list, txt_list])
 
 def rating_convert(str):
-    if str=="__label__1":
+    if str == "__label__1":
         return "Great!"
     else:
         return "Bad!"

@@ -1,8 +1,9 @@
 from elasticsearch import Elasticsearch
+from params import ES_address
 
 class elasticSearch():
     def __init__(self, index_type: str, index_name: str, ip="127.0.0.1"):
-        self.es = Elasticsearch("localhost:9200")
+        self.es = Elasticsearch(ES_address)
         self.index_type = index_type
         self.index_name = index_name
 
