@@ -16,8 +16,11 @@ def get_es():
     if request.method == "POST":
         es = elasticSearch(index_name=index_name,
                            index_type=index_type)
-        query = request.form['keyword']
-        data = es.search(query)
+        print(request.form)
+        comments_query = request.form['keyword']
+        rating_query = request.form['rating']
+        title_query = request.form['only_title']
+        data = es.search(comments_query, rating_query, title_query)
         result_data = data['hits']['hits']
         result_list = []
         for item in result_data:
@@ -26,7 +29,9 @@ def get_es():
         return render_template('search_result.html',
                                search_result=result_list,
                                search_nums=address_len,
-                               keyword=query)
+                               keyword=comments_query,
+                               rating_choice=rating_query,
+                               only_title=title_query)
     return render_template('search.html')
 
 if __name__ == '__main__':

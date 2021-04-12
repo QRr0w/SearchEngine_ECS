@@ -15,12 +15,18 @@
         <form class="form-inline" method="POST" action="/search">
             <div class="form-group">
                 <input style="height: 40px; width: 360px;" class="form-control"
-                        type="search" name="keyword" value="{{ keyword }}">
+                        type="search" name="keyword" value="{{ keyword }}"><br>
             </div>
-            <input class="btn btn-small btn-success" role="button" type="submit" value="Search">
+            <input class="btn btn-small btn-success" role="button" type="submit" value="Search"><br>
+            Search on titles? Yes <input type="radio" name="only_title" value="Yes" />
+            No <input type="radio" name="only_title" value="No" checked/>
+            <br>All comments   <input type="radio" checked="checked" name="rating" value="All" /><br>
+            Great comments <input type="radio" name="rating" value="Great!" /><br>
+            Bad comments   <input type="radio" name="rating" value="Bad!" />
         </form>
     <br>
-    <br>Find <font color="blue">{{ search_nums }}</font> results
+    <br>Find <font color="blue">{{ search_nums }}</font> results when match <font color="red">{{ rating_choice }}</font> comments/titles
+    <br>Search on titles: <font color="red">{{ only_title }}</font>
     <br>
     <br>
     <div id="box">

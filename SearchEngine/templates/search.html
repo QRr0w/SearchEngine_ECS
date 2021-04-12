@@ -87,10 +87,13 @@
 <body>
 <div class="body">
     <form method="post" action="/search" align="center">
-        <h1 align="center">Enter your query!</h1><br>
         <div class="sousuo">
-            <input type="search" name="keyword" >
-        </div>
+            <input type="search" name="keyword" placeholder="Please enter your Query"><br>
+        </div>Search on titles? Yes <input type="radio" name="only_title" value="Yes" />
+        No <input type="radio" name="only_title" value="No" checked/><br>
+        All comments   <input type="radio" checked="checked" name="rating" value="All" /><br>
+        Great comments <input type="radio" name="rating" value="Great!" /><br>
+        Bad comments   <input type="radio" name="rating" value="Bad!" />
         <div class="submit">
             <input type="submit" value="Search">
         </div>
