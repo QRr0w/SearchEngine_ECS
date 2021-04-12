@@ -6,7 +6,7 @@ import numpy as np
 def insert_data_to_es():
     es = Elasticsearch()
     path = 'dataset\\test.ft.txt'
-    index_name = "version3.0"
+    index_name = "version5.0"
     setting = {
         "settings": {
             "analysis": {
@@ -47,9 +47,9 @@ def insert_data_to_es():
                 "type": "BM25",
                 "b": "0.75",
                 "k1": "1"
-            }
-        }
-              },
+                    }
+                }
+            },
             "number_of_replicas": 1,
             "number_of_shards": 1
         }
@@ -59,6 +59,7 @@ def insert_data_to_es():
             "comments": {
                 "type": "text",
                 "analyzer": "english",
+                "similarity": "my_similarity",
                 "fields": {
                     "keyword": {
                         "type": "keyword",
@@ -81,14 +82,6 @@ def insert_data_to_es():
             "title": {
                 "type": "text",
                 "analyzer": "english",
-                "similarity":{
-                    "my_similarity":{
-                        "type":"BM25",
-                        "k1":"1.2",
-                        "b":"0.75",
-                        "discount_overlaps":256
-                    }
-                },
                 "fields": {
                     "keyword": {
                         "type": "keyword",
@@ -99,21 +92,17 @@ def insert_data_to_es():
         }
     }
     dataset = load_data(path)
-    try:
-        es.indices.create(index=index_name,
+    es.indices.create(index=index_name,
                           body=setting)
-        es.indices.put_mapping(body=mapping, index=index_name)
-
-        for index in range(len(dataset[0])):
-            es.index(index=index_name,
+    es.indices.put_mapping(body=mapping, index=index_name)
+    for index in range(len(dataset[0])):
+        es.index(index=index_name,
                      body={
                          'id': index,
                          'title': dataset[1][index],
                          'rating': dataset[0][index],
                          'comments': dataset[2][index]
                      })
-    except:
-        print("Error: unable to fetch data")
 
 
 def load_data(path):
