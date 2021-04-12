@@ -78,86 +78,10 @@ class elasticSearch():
             "sort": [],
             "aggs": {}
         }
-        # if is_title=="No":
-        #     dsl = {
-        #         "query": {
-        #             "bool": {
-        #                 "must": [{
-        #                     "match": {
-        #                         "comments": query
-        #                     },
-        #                     "match": {
-        #                         "rating": rating_query
-        #                     }
-        #                 }],
-        #                 "must_not": [],
-        #                 "should": []
-        #             }
-        #         },
-        #         "from": 0,
-        #         "size": 10,
-        #         "sort": [],
-        #         "aggs": {}
-        #     }
-        #     if rating_query == "All":
-        #         dsl = {
-        #             "query": {
-        #                 "bool": {
-        #                     "must": [{
-        #                         "match": {
-        #                             "comments": query
-        #                         }
-        #                     }],
-        #                     "must_not": [],
-        #                     "should": []
-        #                 }
-        #             },
-        #             "from": 0,
-        #             "size": 10,
-        #             "sort": [],
-        #             "aggs": {}
-        #         }
-        #     else:
-        #         dsl = {
-        #             "query": {
-        #                 "bool": {
-        #                     "must": [{
-        #                         "match": {
-        #                             "title": query
-        #                         },
-        #                         "match": {
-        #                             "rating": rating_query
-        #                         }
-        #                     }],
-        #                     "must_not": [],
-        #                     "should": []
-        #                 }
-        #             },
-        #             "from": 0,
-        #             "size": 10,
-        #             "sort": [],
-        #             "aggs": {}
-        #         }
-        #         if rating_query == "All":
-        #             dsl = {
-        #                 "query": {
-        #                     "bool": {
-        #                         "must": [{
-        #                             "match": {
-        #                                 "title": query
-        #                             }
-        #                         }],
-        #                         "must_not": [],
-        #                         "should": []
-        #                     }
-        #                 },
-        #                 "from": 0,
-        #                 "size": 10,
-        #                 "sort": [],
-        #                 "aggs": {}
-        #             }
+
 
         match_data = self.es.search(index=self.index_name,
                                     body=dsl,
                                     size=count)
         return match_data
+
