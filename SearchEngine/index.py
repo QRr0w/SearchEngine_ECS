@@ -95,6 +95,8 @@ def insert_data_to_es():
                           body=setting)
     es.indices.put_mapping(body=mapping, index=index_name)
     for index in range(len(dataset[0])):
+        if index > 20000:
+            break
         es.index(index=index_name,
                      body={
                          'id': index,
